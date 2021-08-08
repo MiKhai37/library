@@ -18,7 +18,7 @@ function addBookToLibrary(library, author, title, nbPages, read) {
     library.push(new Book(author, title, nbPages, read));
 }
 
-function createBookCards(containerID, library) {
+function renderBookCards(containerID, library) {
     const container = document.querySelector('#' + containerID);
     for (let i = 0; i < library.length; i++) {
         div = document.createElement('div');
@@ -37,13 +37,9 @@ function createBookCards(containerID, library) {
         pAuthor.textContent = library[i].author;
         containerCard.appendChild(pAuthor);
 
-        pRead = document.createElement('p');
-        if (library[i].read) {
-            pRead.textContent = "Read";
-        } else {
-            pRead.textContent = "Not Read";
-        }
-        containerCard.appendChild(pRead);
+        pPages = document.createElement('p');
+        pPages.textContent = library[i].nbPages + " pages";
+        containerCard.appendChild(pPages);
 
         readBtn = document.createElement('button');
         readBtn.classList.add('btn')
@@ -86,15 +82,17 @@ function overlayOff() {
     document.getElementById("overlay").style.display = "none";
 } 
 
-addBookToLibrary(myLibrary, 'author1', 'title1', 100, true);
-addBookToLibrary(myLibrary, 'author2', 'title2', 200, false);
-addBookToLibrary(myLibrary, 'author3', 'title3', 300, false);
-addBookToLibrary(myLibrary, 'author3', 'title3', 300, false);
-addBookToLibrary(myLibrary, 'author3', 'title3', 300, false);
+function toggleRead() {
+    
+}
 
+addBookToLibrary(myLibrary, 'author 1', 'title 1', 100, true);
+addBookToLibrary(myLibrary, 'author 2', 'title 2', 200, false);
+addBookToLibrary(myLibrary, 'author 3', 'title 3', 300, false);
+addBookToLibrary(myLibrary, 'author 3', 'title 3', 300, false);
+addBookToLibrary(myLibrary, 'author 3', 'title 3', 300, false);
 
-
-createBookCards('card-container', myLibrary);
+renderBookCards('card-container', myLibrary);
 
 const newBtn = document.querySelector('#new-btn');
 newBtn.addEventListener('click', () => {
@@ -104,4 +102,4 @@ newBtn.addEventListener('click', () => {
 const cancelFormBtn = document.querySelector('#cancel-btn-form');
 cancelFormBtn.addEventListener('click', () => {
     overlayOff();
-})
+});
