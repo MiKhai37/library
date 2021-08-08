@@ -9,11 +9,21 @@
         <script src="script.js" defer></script>
     </head>
     <body>
-        <button id="new-btn" class="btn">New Book</button>
-        <h1 id="title">Library</h1>
-        <div id='card-container'>
-
+        <div class="header">
+            <h1 id="title">Library</h1>
         </div>
+        <div class="row">
+            <div class="column left">
+                <div id='card-container'></div>
+            </div>
+            <div class="column right">
+                <button id="new-btn" class="btn">New Book</button>
+            </div>
+        </div>
+        <div class="footer">
+            <p>Made By Michael TANGUY<a id="github-link" class="link" href="https://github.com/MiKhai37/library" target="_blank"><i class="fa fa-github icon"></a></i></p>
+        </div>
+        <!--Overlay-->
         <div id="overlay">
             <form id="add-form" action="">
                 <h2 id="form-title">Register Form</h2>
@@ -21,7 +31,6 @@
                     <i class="fa fa-book icon"></i>
                     <input class="input-field" type="text" placeholder="Title" name="title">
                 </div>
-
                 <div class="input-container">
                     <i class="fa fa-user icon"></i>
                     <input class="input-field" type="text" placeholder="Author" name="author">

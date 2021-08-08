@@ -25,13 +25,6 @@ function createBookCards(containerID, library) {
         div.classList.add('card');
         container.appendChild(div);
 
-        img = document.createElement('img');
-        img.classList.add('img-card')
-        img.style.borderRadius = "20px 0px 0px 20px"
-        img.src = '/img_avatar.png';
-        img.alt = "Avatar";
-        div.appendChild(img);
-
         containerCard = document.createElement('div');
         containerCard.classList.add('container');
         div.appendChild(containerCard);
@@ -46,11 +39,41 @@ function createBookCards(containerID, library) {
 
         pRead = document.createElement('p');
         if (library[i].read) {
-            pRead.textContent = "read";
+            pRead.textContent = "Read";
         } else {
-            pRead.textContent = "not read";
+            pRead.textContent = "Not Read";
         }
         containerCard.appendChild(pRead);
+
+        readBtn = document.createElement('button');
+        readBtn.classList.add('btn')
+        containerCard.appendChild(readBtn);
+
+        readIcon = document.createElement('i');
+        readIcon.classList.add("fa");
+        if (library[i].read) {
+            readIcon.classList.add("fa-check");
+            readIcon.style.backgroundColor = "green"
+            readBtn.style.backgroundColor = "green"
+        } else {
+            readIcon.classList.add("fa-times");
+            readIcon.style.backgroundColor = "orangered"
+            readBtn.style.backgroundColor = "orangered"
+        }
+        readIcon.classList.add("icon");
+        readBtn.appendChild(readIcon);
+
+        deleteBtn = document.createElement('button');
+        deleteBtn.classList.add("btn");
+        deleteBtn.style.backgroundColor = "orangered";
+        containerCard.appendChild(deleteBtn);
+
+        deleteIcon = document.createElement('i');
+        deleteIcon.classList.add("fa");
+        deleteIcon.classList.add("fa-trash");
+        deleteIcon.classList.add("icon");
+        deleteIcon.style.backgroundColor = "orangered"
+        deleteBtn.appendChild(deleteIcon);
     }
 
 }
