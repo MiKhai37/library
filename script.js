@@ -55,21 +55,30 @@ function createBookCards(containerID, library) {
 
 }
 
-function on() {
+function overlayOn() {
     document.getElementById("overlay").style.display = "block";
 }
   
-function off() {
+function overlayOff() {
     document.getElementById("overlay").style.display = "none";
 } 
 
 addBookToLibrary(myLibrary, 'author1', 'title1', 100, true);
 addBookToLibrary(myLibrary, 'author2', 'title2', 200, false);
 addBookToLibrary(myLibrary, 'author3', 'title3', 300, false);
+addBookToLibrary(myLibrary, 'author3', 'title3', 300, false);
+addBookToLibrary(myLibrary, 'author3', 'title3', 300, false);
+
+
 
 createBookCards('card-container', myLibrary);
 
 const newBtn = document.querySelector('#new-btn');
 newBtn.addEventListener('click', () => {
-    on();
+    overlayOn();
   });
+
+const cancelFormBtn = document.querySelector('#cancel-btn-form');
+cancelFormBtn.addEventListener('click', () => {
+    overlayOff();
+})
