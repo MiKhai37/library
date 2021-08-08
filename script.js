@@ -26,6 +26,8 @@ function createBookCards(containerID, library) {
         container.appendChild(div);
 
         img = document.createElement('img');
+        img.classList.add('img-card')
+        img.style.borderRadius = "20px 0px 0px 20px"
         img.src = '/img_avatar.png';
         img.alt = "Avatar";
         div.appendChild(img);
@@ -53,8 +55,21 @@ function createBookCards(containerID, library) {
 
 }
 
+function on() {
+    document.getElementById("overlay").style.display = "block";
+}
+  
+function off() {
+    document.getElementById("overlay").style.display = "none";
+} 
+
 addBookToLibrary(myLibrary, 'author1', 'title1', 100, true);
 addBookToLibrary(myLibrary, 'author2', 'title2', 200, false);
 addBookToLibrary(myLibrary, 'author3', 'title3', 300, false);
 
 createBookCards('card-container', myLibrary);
+
+const newBtn = document.querySelector('#new-btn');
+newBtn.addEventListener('click', () => {
+    on();
+  });
