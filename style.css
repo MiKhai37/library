@@ -43,6 +43,7 @@ body, html {
 
 /* Style the footer */
 .footer {
+  background-color: darkorchid;
   position: fixed;
   overflow: hidden;
   width: 100%;
@@ -77,6 +78,7 @@ body, html {
   min-width: 200px;
   height: 200px;
 }
+
   /* On mouse-over, add a deeper shadow */
 .card:hover {
     box-shadow: 0 20px 20px 0 rgba(0,0,0,0.3);
@@ -103,11 +105,23 @@ body, html {
   cursor: pointer; /* Add a pointer on hover */
 }
 
-#form-title {
+#form-container {
+  background-color: darkmagenta;
+  width: 50%;
+  border: 5px solid black;
+  border-radius: 20px;
+  margin: auto;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#form-h2 {
   text-align: center;
   padding: 20px;
   font-size: 30px;
   color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
 /* Style the input container */
