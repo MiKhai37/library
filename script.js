@@ -30,10 +30,9 @@ function render(containerID, library) {
     const container = document.querySelector('#' + containerID);
     // Wipe Out the container
     container.innerHTML = ""
-    console.log(library.length)
     // Render all book in library, card style
     for (let i = 0; i < library.books.length; i++) {
-        console.log("add" + i)
+        console.log('render the book: ' + library.books[i].title)
         const div = document.createElement('div');
         div.classList.add('card');
         div.id = `card_${i}`;
