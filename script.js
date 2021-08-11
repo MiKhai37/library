@@ -1,19 +1,25 @@
-let myLibrary = [{"author": "author 1", "title": "title 1", "nbPages": 100, "read": true},
-                 {"author": "author 2", "title": "title 2", "nbPages": 200, "read": false},
-                 {"author": "author 3", "title": "title 3", "nbPages": 400, "read": true},
-                 {"author": "author 4", "title": "title 4", "nbPages": 100, "read": false}];
+class library{
+    constructor() {
+        this.array = [];
+    }
+    get length() {
+        return this.array.length
+    }
+    get books() {
+        return this.array
+    }
+    addBook(author, title, nbPages, read) {
+        this.array.push(new Book(author, title, nbPages, read));
+    }
 
-function Book(author, title, nbPages, read) {
-    this.author = author;
-    this.title = title;
-    this.nbPages = nbPages;
-    this.read = read;
-    this.info = function() {
-        if (read) {
-            return title + " by " + author + ", " + nbPages + "pages, read";
-        } else {
-            return title + " by " + author + ", " + nbPages + "pages, not read";
-        }
+}
+
+class Book {
+    constructor(author, title, nbPages, read) {
+        this.author = author;
+        this.title = title;
+        this.nbPages = nbPages;
+        this.read = read;
     }
 }
 
@@ -21,21 +27,16 @@ function addBookToLibrary(library, author, title, nbPages, read) {
     library.push(new Book(author, title, nbPages, read));
 }
 
-function removeBookToLibrary(library, cardID) {
-    const book = document.getElementById(cardID)
-    library.pop(cardID)
-}
-
 function renderBookCards(containerID, library) {
     const container = document.querySelector('#' + containerID);
-    for (let i = 0; i < library.length; i++) {
-
-        //If the card already exists don't render them
-        if (document.getElementById(`card_${i}`)) continue;
-
+    console.log("addrender")
+    console.log(library.length)
+    for (let i = 0; i < library.books.length; i++) {
+        console.log("add" + i)
         const div = document.createElement('div');
         div.classList.add('card');
-        div.id = `card_${i}`
+        div.id = `card_${i}`;
+        div.dataset.id = i;
         container.appendChild(div);
 
         const containerCard = document.createElement('div');
@@ -43,15 +44,15 @@ function renderBookCards(containerID, library) {
         div.appendChild(containerCard);
 
         const h4Title = document.createElement('h4');
-        h4Title.textContent = library[i].title;
+        h4Title.textContent = library.books[i].title;
         containerCard.appendChild(h4Title);
 
         const pAuthor = document.createElement('p');
-        pAuthor.textContent = library[i].author;
+        pAuthor.textContent = library.books[i].author;
         containerCard.appendChild(pAuthor);
 
         const pPages = document.createElement('p');
-        pPages.textContent = library[i].nbPages + " pages";
+        pPages.textContent = library.books[i].nbPages + " pages";
         containerCard.appendChild(pPages);
 
         const readBtn = document.createElement('button');
@@ -60,7 +61,7 @@ function renderBookCards(containerID, library) {
 
         const readIcon = document.createElement('i');
         readIcon.classList.add("fa");
-        if (library[i].read) {
+        if (library.books[i].read) {
             readIcon.classList.add("fa-check");
             readIcon.style.backgroundColor = "green"
             readBtn.style.backgroundColor = "green"
@@ -72,8 +73,8 @@ function renderBookCards(containerID, library) {
         readIcon.classList.add("icon");
         readBtn.appendChild(readIcon);
         readBtn.addEventListener('click', () => {
-            library[i].read = !library[i].read
-            if (library[i].read) {
+            library.books[i].read = !library.books[i].read
+            if (library.books[i].read) {
                 readIcon.classList.remove("fa-times");
                 readIcon.classList.add("fa-check");
                 readIcon.style.backgroundColor = "green"
@@ -88,6 +89,7 @@ function renderBookCards(containerID, library) {
 
         const deleteBtn = document.createElement('button');
         deleteBtn.classList.add("btn");
+        deleteBtn.dataset.id = i;
         deleteBtn.style.backgroundColor = "orangered";
         containerCard.appendChild(deleteBtn);
 
@@ -97,8 +99,20 @@ function renderBookCards(containerID, library) {
         deleteIcon.classList.add("icon");
         deleteIcon.style.backgroundColor = "orangered"
         deleteBtn.appendChild(deleteIcon);
+
+        deleteBtn.addEventListener('click', delCard)
     }
 
+}
+
+function delCard() {
+    const id = this.dataset.id;
+    console.log(this.dataset.id);
+    
+    const container = document.querySelector('#card-container');
+    const div = document.querySelector(`#card_${id}`);
+    myLibrary.books.splice(id,1);
+    container.removeChild(div);
 }
 
 function overlayOn() {
@@ -108,6 +122,14 @@ function overlayOn() {
 function overlayOff() {
     document.getElementById("overlay").style.display = "none";
 } 
+
+let myLibrary = new library()
+
+myLibrary.addBook('author1', 'title1', '200', true)
+myLibrary.addBook('author2', 'title2', '300', false)
+myLibrary.addBook('author3', 'title3', '400', false)
+
+
 
 renderBookCards('card-container', myLibrary);
 
@@ -127,7 +149,7 @@ addBookBtn.addEventListener('click', () => {
     const author = document.querySelector("#form-author").value;
     const pages = document.querySelector("#form-pages").value;
     console.log('add');
-    addBookToLibrary(myLibrary, author, title, pages, false);
+    myLibrary.addBook(author, title, pages, false);
     renderBookCards('card-container', myLibrary);
     overlayOff();
 })
