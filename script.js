@@ -11,6 +11,9 @@ class library{
     addBook(author, title, nbPages, read) {
         this.array.push(new Book(author, title, nbPages, read));
     }
+    delBook(index) {
+        this.array.splice(index,1);
+    }
 
 }
 
@@ -23,14 +26,12 @@ class Book {
     }
 }
 
-function addBookToLibrary(library, author, title, nbPages, read) {
-    library.push(new Book(author, title, nbPages, read));
-}
-
-function renderBookCards(containerID, library) {
+function render(containerID, library) {
     const container = document.querySelector('#' + containerID);
-    console.log("addrender")
+    // Wipe Out the container
+    container.innerHTML = ""
     console.log(library.length)
+    // Render all book in library, card style
     for (let i = 0; i < library.books.length; i++) {
         console.log("add" + i)
         const div = document.createElement('div');
@@ -111,10 +112,11 @@ function delCard() {
     
     const container = document.querySelector('#card-container');
     const div = document.querySelector(`#card_${id}`);
-    myLibrary.books.splice(id,1);
+    myLibrary.delBook(id)
     container.removeChild(div);
 }
 
+//Functions to display or not the form overlay
 function overlayOn() {
     document.getElementById("overlay").style.display = "block";
 }
@@ -129,9 +131,7 @@ myLibrary.addBook('author1', 'title1', '200', true)
 myLibrary.addBook('author2', 'title2', '300', false)
 myLibrary.addBook('author3', 'title3', '400', false)
 
-
-
-renderBookCards('card-container', myLibrary);
+render('card-container', myLibrary);
 
 const newBtn = document.querySelector('#new-btn');
 newBtn.addEventListener('click', () => {
@@ -145,11 +145,12 @@ cancelFormBtn.addEventListener('click', () => {
 
 const addBookBtn = document.querySelector('#add-btn-form')
 addBookBtn.addEventListener('click', () => {
+    // Retrieve the info from the form
     const title = document.querySelector("#form-title").value;
     const author = document.querySelector("#form-author").value;
     const pages = document.querySelector("#form-pages").value;
-    console.log('add');
+    // Use library method to add the new book
     myLibrary.addBook(author, title, pages, false);
-    renderBookCards('card-container', myLibrary);
+    render('card-container', myLibrary);
     overlayOff();
 })
