@@ -24,6 +24,9 @@ class Book {
         this.nbPages = nbPages;
         this.read = read;
     }
+    info() {
+        console.log(this.title, this.author, this.nbPages, this.read)
+    }
 }
 
 function render(containerID, library) {
@@ -32,34 +35,40 @@ function render(containerID, library) {
     container.innerHTML = ""
     // Render all book in library, card style
     for (let i = 0; i < library.books.length; i++) {
-        console.log('render the book: ' + library.books[i].title)
+
+        library.books[i].info();
+
         const div = document.createElement('div');
+        const containerCard = document.createElement('div');
+        const h4Title = document.createElement('h4');
+        const pAuthor = document.createElement('p');
+        const pPages = document.createElement('p');
+        const readBtn = document.createElement('button');
+        const readIcon = document.createElement('i');
+        const deleteBtn = document.createElement('button');
+        const deleteIcon = document.createElement('i');
+
         div.classList.add('card');
         div.id = `card_${i}`;
         div.dataset.id = i;
         container.appendChild(div);
 
-        const containerCard = document.createElement('div');
         containerCard.classList.add('container');
         div.appendChild(containerCard);
-
-        const h4Title = document.createElement('h4');
+        
         h4Title.textContent = library.books[i].title;
         containerCard.appendChild(h4Title);
 
-        const pAuthor = document.createElement('p');
         pAuthor.textContent = library.books[i].author;
         containerCard.appendChild(pAuthor);
 
-        const pPages = document.createElement('p');
         pPages.textContent = library.books[i].nbPages + " pages";
         containerCard.appendChild(pPages);
-
-        const readBtn = document.createElement('button');
+        
         readBtn.classList.add('btn')
         containerCard.appendChild(readBtn);
 
-        const readIcon = document.createElement('i');
+        
         readIcon.classList.add("fa");
         if (library.books[i].read) {
             readIcon.classList.add("fa-check");
@@ -87,13 +96,13 @@ function render(containerID, library) {
             }
         });
 
-        const deleteBtn = document.createElement('button');
+        
         deleteBtn.classList.add("btn");
         deleteBtn.dataset.id = i;
         deleteBtn.style.backgroundColor = "orangered";
         containerCard.appendChild(deleteBtn);
 
-        const deleteIcon = document.createElement('i');
+        
         deleteIcon.classList.add("fa");
         deleteIcon.classList.add("fa-trash");
         deleteIcon.classList.add("icon");
@@ -107,7 +116,6 @@ function render(containerID, library) {
 
 function delCard() {
     const id = this.dataset.id;
-    console.log(this.dataset.id);
     
     const container = document.querySelector('#card-container');
     const div = document.querySelector(`#card_${id}`);
