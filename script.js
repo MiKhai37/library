@@ -21,7 +21,7 @@ class Book {
     constructor(author, title, nbPages, read) {
         this.author = author;
         this.title = title;
-        this.nbPages = nbPages;
+        this.nbPages = nbPages
         this.read = read;
     }
     info() {
@@ -111,7 +111,6 @@ function render(containerID, library) {
 
         deleteBtn.addEventListener('click', delCard)
     }
-
 }
 
 function delCard() {
