@@ -18,14 +18,14 @@ class library{
 }
 
 class Book {
-    constructor(author, title, totPages, read) {
+    constructor(author, title, nbPages, read) {
         this.author = author;
         this.title = title;
-        this.totPages = totPages
+        this.nbPages = nbPages
         this.read = read;
     }
     info() {
-        console.log(this.title, this.author, this.totPages, this.read)
+        console.log(this.title, this.author, this.nbPages, this.read)
     }
 }
 
@@ -39,20 +39,35 @@ function render(containerID, library) {
         card.classList.add('card')
         card.innerHTML = `<h4>${library.books[i].title}</h4>
                           <p>${library.books[i].author}</p>
-                          <p>${library.books[i].totPages} pages</p>`;
+                          <p>${library.books[i].nbPages} pages</p>`;
         container.appendChild(card);
 
         const readBtn = document.createElement('button')
         readBtn.classList.add('btn');
-        readBtn.innerHTML = '<i class="fa fa-check icon"></i>'
+        readBtn.innerHTML = (library.books[i].read) ? '<i class="fa fa-check icon"></i>' : '<i class="fa fa-times icon"></i>'
+        readBtn.style.backgroundColor = (library.books[i].read) ? 'green':'red';
+        readBtn.addEventListener('click', () => {
+            library.books[i].read = !library.books[i].read
+            if (library.books[i].read) {
+                readBtn.innerHTML = '<i class="fa fa-check icon"></i>'
+                readBtn.style.backgroundColor = 'green';
+            } else {
+                readBtn.innerHTML = '<i class="fa fa-times icon"></i>'
+                readBtn.style.backgroundColor = 'red';
+            };
+        });
         card.appendChild(readBtn);
 
         const delBtn = document.createElement('button');
         delBtn.classList.add('btn');
         delBtn.innerHTML = '<i class="fa fa-trash icon"></i>';
+        delBtn.style.backgroundColor = 'orangered'
+        delBtn.addEventListener('click', delCard)
         card.appendChild(delBtn);
     }
 }
+
+
 
 function delCard() {
     const id = this.dataset.id;
