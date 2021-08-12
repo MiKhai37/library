@@ -135,8 +135,7 @@ body, html {
 /* Style the form icons */
 .icon {
   padding: 5px;
-  background: dodgerblue;
-  color: white;
+  color: black;
   justify-content: center;
   align-content: center;
 }
