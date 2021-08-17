@@ -1,4 +1,16 @@
-class library{
+class Book {
+    constructor(author, title, nbPages, read) {
+        this.author = author;
+        this.title = title;
+        this.nbPages = nbPages
+        this.read = read;
+    }
+    info() {
+        console.log(this.title, this.author, this.nbPages, this.read)
+    }
+}
+
+class Library{
     constructor() {
         this.array = [];
     }
@@ -14,20 +26,8 @@ class library{
     delBook(index) {
         this.array.splice(index,1);
     }
-
-}
-
-class Book {
-    constructor(author, title, nbPages, read) {
-        this.author = author;
-        this.title = title;
-        this.nbPages = nbPages
-        this.read = read;
-    }
-    info() {
-        console.log(this.title, this.author, this.nbPages, this.read)
-    }
-}
+  
+  }
 
 function render(containerID, library) {
     const container = document.querySelector('#' + containerID);
@@ -84,7 +84,7 @@ function overlayOff() {
     document.getElementById("overlay").style.display = "none";
 } 
 
-let myLibrary = new library()
+let myLibrary = new Library()
 
 myLibrary.addBook('author1', 'title1', '200', true)
 myLibrary.addBook('author2', 'title2', '300', false)
